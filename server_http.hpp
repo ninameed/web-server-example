@@ -297,6 +297,10 @@ namespace SimpleWeb {
                         if(line.substr(path_end+1, protocol_end-path_end-1)!="HTTP")
                             return false;
                         request->http_version=line.substr(protocol_end+1, line.size()-protocol_end-2);
+                        //Check if the HTTP-version is empty. If empty, terminate connection due to invalid HTTP-request. 
+                        if (request->http_version == ""){
+                            return false; 
+                        }  
                     }
                     else
                         return false;
